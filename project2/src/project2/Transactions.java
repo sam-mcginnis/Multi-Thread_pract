@@ -20,7 +20,6 @@ public class Transactions {
 			new Deposit(sharedLocation, "D3");
 			new Deposit(sharedLocation, "D4");
 			new Deposit(sharedLocation, "D5");
-			new Deposit(sharedLocation, "D6");
 			
 			new Withdraw(sharedLocation, "W1");
 			new Withdraw(sharedLocation, "W2");
