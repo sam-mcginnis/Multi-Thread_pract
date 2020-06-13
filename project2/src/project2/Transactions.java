@@ -1,7 +1,7 @@
 /* Name Samuel McGinnis:
  Course: CNT 4714 Summer 2020
  Assignment title: Project 2 – Synchronized, Cooperating Threads Under Locking
- Due Date: June 14, 2020
+ Due Date: June 10, 2020
 */
 package project2;
 
@@ -20,6 +20,7 @@ public class Transactions {
 			new Deposit(sharedLocation, "D3");
 			new Deposit(sharedLocation, "D4");
 			new Deposit(sharedLocation, "D5");
+			new Deposit(sharedLocation, "D6");
 			
 			new Withdraw(sharedLocation, "W1");
 			new Withdraw(sharedLocation, "W2");
