@@ -1,0 +1,66 @@
+package project2;
+
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class Sync implements Bank{
+	
+	private Lock obtainLock = new ReentrantLock(false);
+	
+	private Condition makeTransaction = obtainLock.newCondition();
+	private Condition showTransaction = obtainLock.newCondition();
+	
+	private int bank = 0;
+	
+	private boolean engaged = false;
+	
+	
+	public int setStatement( int depValue) {		
+		obtainLock.lock();
+		int stagDep = 0;
+		
+		try {
+			while(engaged) {
+				makeTransaction.await();
+			}
+			bank += depValue;
+			stagDep = bank;
+			engaged = true;
+			showTransaction.signal();
+		}
+		catch(InterruptedException exception){
+			exception.printStackTrace();
+		}
+		finally {
+			obtainLock.unlock();
+		}
+		return stagDep;
+	}
+	
+	public int getStatement(int value){
+		
+		obtainLock.lock();
+		int stagWit = 0;
+		
+		try {
+			
+			while(!engaged)
+			{
+				showTransaction.await();
+			}
+			
+			engaged = false;
+			bank -= value;
+			stagWit = bank;
+			makeTransaction.signal();
+		}
+		catch(InterruptedException exception) {
+			exception.printStackTrace();
+		}
+		finally {
+			obtainLock.unlock();
+		}
+		return stagWit;
+	}
+}
