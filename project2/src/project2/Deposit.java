@@ -2,7 +2,8 @@ package project2;
 
 import java.util.Random;
 
-public class Deposit implements Runnable{
+public class Deposit implements Runnable 
+{
 
 	private static Random generator = new Random();
 	private Bank sharedLocation;
@@ -10,8 +11,6 @@ public class Deposit implements Runnable{
 	public Deposit(Bank shared, String threadName) 
 	{
 		name = threadName;
-		Thread D = new Thread(this, name);
-		D.start();
 		sharedLocation = shared;
 	}
 	
